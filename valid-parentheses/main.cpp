@@ -10,30 +10,26 @@ public:
             return true;
         }
         stack<char> check_stack;
-        for(int i=0;i<s.size();i++){
-            if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
+        for(int i=0;i<s.size();i++) {
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
                 check_stack.push(s[i]);
-            }
-            else if(s[i]==')'){
-                if(!check_stack.empty() && check_stack.top()=='('){
+            } else if (s[i] == ')') {
+                if (!check_stack.empty() && check_stack.top() == '(') {
                     check_stack.pop();
-                }
-                else
+                } else
                     return false;
-            }
-            else if(s[i]==']'){
-                if(!check_stack.empty() && check_stack.top()=='['){
+            } else if (s[i] == ']') {
+                if (!check_stack.empty() && check_stack.top() == '[') {
                     check_stack.pop();
-                }
-                else
+                } else
                     return false;
-            }
-            else if(s[i]=='}') {
-                if (!check_stack.empty() && check_stack.top()=='{') {
+            } else if (s[i] == '}') {
+                if (!check_stack.empty() && check_stack.top() == '{') {
                     check_stack.pop();
                 } else
                     return false;
             }
+        }
 
             if(check_stack.empty()){
                 return true;
@@ -42,14 +38,14 @@ public:
             }
         }
 
-    }
+
 };
 
 
 int main() {
     Solution solve;
-    string s="()";
-    int result=solve.isValid(s);
+    string sd="()";
+    int result=solve.isValid(sd);
     cout<<result<<endl;
     return 0;
 }

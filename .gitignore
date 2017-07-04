@@ -1,0 +1,9 @@
+/obj/
+.o
+.dylib
+.deb
+.xml
+.iml
+/packages/
+/.theos/
+/.idea/
