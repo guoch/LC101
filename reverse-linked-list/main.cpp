@@ -3,7 +3,7 @@
 using namespace std;
 
 
-  struct ListNode {
+ struct ListNode {
       int val;
       ListNode *next;
       ListNode(int x) : val(x), next(NULL) {}
@@ -18,19 +18,20 @@ public:
         ListNode *precur=head;
 
         ListNode *newhead=NULL;
-        while(cur!=NULL){
+        while(cur->next!=NULL){
             precur=cur;
-            if(cur->next!=NULL)
-                cur=cur->next;
+            cur=cur->next;
 //            current=cur;
 //            current=cur;
 //            current->next=precur;
 
             if(newhead==NULL){
                 newhead=precur;
+				newhead->next = NULL;
             }else{
-                precur->next=newhead;
-                newhead=precur;
+				ListNode *saved = precur;
+                saved->next=newhead;
+                newhead=saved;
             }
         }
         return newhead;
