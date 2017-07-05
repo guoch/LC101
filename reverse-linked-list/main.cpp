@@ -34,6 +34,8 @@ public:
                 newhead=saved;
             }
         }
+		cur->next = newhead;
+		newhead = cur;
         return newhead;
 
     }
