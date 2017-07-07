@@ -24,33 +24,43 @@ using namespace std;
 class NestedIterator {
 public:
 
-	stack<NestedInteger> mystack;
+	stack<vector<NestedInteger>> mystack;
 
 	NestedIterator(vector<NestedInteger> &nestedList) {
-		for(int i=0;i<nestedList.size();i++){
-			mystack.push(nestedList[i]);
-
-		}
-
-
+//		for(int i=0;i<nestedList.size();i++){
+//			mystack.push(nestedList[i]);
+//		}
+		// tail first in stack then pop first
+		for(int i=nestedList.size()-1;i>=0;i--)
+			mystack.push(nestedList[i])
 
 	}
 
+	// next always return int !
 	int next() {
-		int nestresult=mystack.top().getInteger();
+		int nestcur=mystack.top().
+		if (isInteger(nestcur)) 
+			result=nestcur.getInteger();
 		mystack.pop();
-
-
-
+		return result;
 	}
 
 	bool hasNext() {
+		while (!mystack.empty()) {
+			vector<NestedInteger> element= mystack.pop();
+			mystack.pop();
+			for (int i = element.size(); i >= 0; i--) {
+				mystack.push(element[i].next());
+			}
+		}
+
+		
 
 	}
 };
 
 
-//this can only be test in leetcode   https://leetcode.com/problems/flatten-nested-list-iterator/#/description
+//this can only be test in leetcode   https://leetcode.com/problems/flatten-nested-list-iterator/
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
