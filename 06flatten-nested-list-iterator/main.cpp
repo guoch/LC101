@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+
 using namespace std;
 
 /**
@@ -24,39 +25,43 @@ using namespace std;
 class NestedIterator {
 public:
 
-	stack<vector<NestedInteger>> mystack;
+    stack<NestedInteger> mystack;
 
-	NestedIterator(vector<NestedInteger> &nestedList) {
+    NestedIterator(vector<NestedInteger> &nestedList) {
 //		for(int i=0;i<nestedList.size();i++){
 //			mystack.push(nestedList[i]);
 //		}
-		// tail first in stack then pop first
-		for(int i=nestedList.size()-1;i>=0;i--)
-			mystack.push(nestedList[i])
+        // tail first in stack then pop first
+        if (!nestedList.empty()) {
+            for (int i = nestedList.size() - 1; i >= 0; i--)
+                mystack.push(nestedList[i]);
+        }
 
-	}
 
-	// next always return int !
-	int next() {
-		int nestcur=mystack.top().
-		if (isInteger(nestcur)) 
-			result=nestcur.getInteger();
-		mystack.pop();
-		return result;
-	}
+    }
 
-	bool hasNext() {
-		while (!mystack.empty()) {
-			vector<NestedInteger> element= mystack.pop();
-			mystack.pop();
-			for (int i = element.size(); i >= 0; i--) {
-				mystack.push(element[i].next());
-			}
-		}
+    // next always return int !
+    int next() {
+        NestedInteger nestcur = mystack.top();
+        mystack.pop();
+        return nestcur.getInteger();
+    }
 
-		
-
-	}
+    bool hasNext() {
+        while (!mystack.empty()) {
+            NestedInteger element = mystack.top();
+//			mystack.pop();
+            if (element.isInteger()) {
+                return true;
+            } else {
+                mystack.pop();
+                for (int i = element.getList().size() - 1; i >= 0; i--) {
+                    mystack.push(element.getList()[i]);
+                }
+            }
+        }
+        return false;
+    }
 };
 
 
@@ -70,6 +75,6 @@ public:
 
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
-	return 0;
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
 }
