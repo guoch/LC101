@@ -4,7 +4,6 @@
 struct ListNode {
     int val;
     ListNode *next;
-
     ListNode(int x) : val(x), next(NULL) {}
 };
 
@@ -22,8 +21,9 @@ public:
             }
             if (l2 != NULL) {
                 sum += l2->val;
-                l1 = l2->next;
+                l2 = l2->next;
             }
+
             ListNode *newnode = new ListNode(sum % 10);
             sum = sum / 10;
             if (head == NULL) {
