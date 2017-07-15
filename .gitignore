@@ -7,3 +7,5 @@
 /packages/
 /.theos/
 /.idea/
+/*/.idea
+/*/cmake-build-debug
