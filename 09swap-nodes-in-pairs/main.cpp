@@ -12,32 +12,23 @@ struct ListNode {
 class Solution {
 public:
 	ListNode *swapPairs(ListNode *head) {
-        if(head==NULL|| head->next==NULL)
-            return head;
+        ListNode *dummy=new ListNode(0);
+        dummy->next=head;
+//        if(head==NULL|| head->next==NULL)
+//            return head;
         ListNode *cur=head;
-        ListNode *precur=head;
-        ListNode *tmp=NULL;
-        ListNode *newhead=NULL;
+        ListNode *precur=dummy;
 
-        while(cur!=NULL && cur->next!=NULL){
-            precur=cur;  //1
-            cur=cur->next;  //2
-            cur->next=precur;  //2->1
-            precur->next=tmp; //2->1->tmp
-
-
-            if(newhead==NULL)
-                newhead=cur;
-            else{
-                tmp=cur;
-            }
-            cur=cur->next;
-//             1 2 3     2 1
-//            ListNode *next=cur->next->next;   //3
-//            cur->next=precur;
-
+        while(cur!=NULL && cur->next!=NULL) {
+            ListNode *q = cur->next;
+            ListNode *r = cur->next->next;
+            precur->next = q;
+            q->next = cur;
+            cur->next = r;
+            precur = cur;
+            cur = r;
         }
-        return newhead;
+        return dummy->next;
 
     }
 };
