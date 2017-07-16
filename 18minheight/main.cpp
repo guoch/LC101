@@ -17,7 +17,7 @@ class Solution {
 public:
     vector<int> findMinHeightTrees(int n, vector<pair<int, int>> &edges) {
         //shortest distance to the leaf node  BFS
-        vector<set<int>> graph;
+        vector<set<int>> graph(n);   //vector<set<int>> graph(n);   if not n, will rum time error
         for (auto edge:edges) {
             graph[edge.first].insert(edge.second);
             graph[edge.second].insert(edge.first);
@@ -26,12 +26,13 @@ public:
             return {0};
 
         vector<int> leafnodes;
-        vector<int> nextleaves;
+
         for (int i = 0; i < graph.size(); i++) {
             if (graph[i].size() == 1)
                 leafnodes.push_back(i);  //all leaf node
         }
         while(1) {
+            vector<int> nextleaves;
             for (auto leafnode: leafnodes) {
                 for (auto neighbor: graph[leafnode]) {
                     graph[neighbor].erase(leafnode);
@@ -40,7 +41,7 @@ public:
                 }
             }
             if(nextleaves.empty())
-                return nextleaves;
+                return leafnodes;
             leafnodes = nextleaves;
         }
     }
