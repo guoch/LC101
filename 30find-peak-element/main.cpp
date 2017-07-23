@@ -15,7 +15,6 @@ public:
             if(nums[i]>nums[i-1] && nums[i]>nums[i+1]){
                 return i;
             }
-            i++;
         }
         if(nums[len-1]>nums[len-2])
             return len-1;
