@@ -12,15 +12,15 @@ public:
         return result;
     }
 
-    void dfs(int begin,int end,int k,vector<int> &v,vector<vector<int>> result){
+    void dfs(int begin,int end,int k,vector<int> &v,vector<vector<int>> &result){
         if(k!=0){
             for(int i=begin;i<=end;i++){
                 v.push_back(i);
-                dfs(i+1,end,k-1,v,result);
-                v.pop_back();    // 1,2   1,3
+                dfs(i+1,end,k-1,v,result);  //下一层遍历的开始位置从i + 1开始，并将k减去1
+                v.pop_back();    // 1,2   1,3   //等到栈返回时，将最后一个元素弹出      最后减去1 然后从 2开始
             }
         }else{
-            result.push_back(v);
+            result.push_back(v);  //当元素个数到达k个时，我们将其保存
         }
     }
         //dfs way 1   2,3,4
